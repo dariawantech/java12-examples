@@ -42,26 +42,20 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-public class CompactNumberFormatParseFr {
+public class CompactNumberFormatParseGrouping {
 
     public static void main(String[] args) throws ParseException {
         NumberFormat nf = NumberFormat.getCompactNumberInstance(
-                Locale.FRANCE, NumberFormat.Style.SHORT);
-        System.out.println("FR/SHORT parsing:");
-        System.out.println("1K: " + nf.parse("1K"));
-        System.out.println("1 k: " + nf.parse("1 k"));
-        System.out.println("1M: " + nf.parse("1M"));
-        System.out.println("1 M: " + nf.parse("1 M"));
-        System.out.println("1B: " + nf.parse("1B"));
-        System.out.println("1 Md:" + nf.parse("1 Md"));
-
-        nf = NumberFormat.getCompactNumberInstance(
-                Locale.FRANCE, NumberFormat.Style.LONG);
-        System.out.println("\nFR/LONG parsing:");
-        System.out.println("1 thousand: " + nf.parse("1 thousand"));
-        System.out.println("1 mille: " + nf.parse("1 mille"));
-        System.out.println("1 million: " + nf.parse("1 million"));
-        System.out.println("1 billion: " + nf.parse("1 billion"));
-        System.out.println("1 milliard: " + nf.parse("1 milliard"));
+                Locale.US, NumberFormat.Style.SHORT);
+        System.out.println("Without Grouping:");
+        System.out.println(nf.parse("1,000K"));
+        System.out.println(nf.parse("1,000M"));
+        System.out.println(nf.parse("1,000B"));
+        
+        nf.setGroupingUsed(true);
+        System.out.println("\nWith Grouping:");
+        System.out.println(nf.parse("1,000K"));
+        System.out.println(nf.parse("1,000M"));
+        System.out.println(nf.parse("1,000B"));
     }
 }
