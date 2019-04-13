@@ -38,25 +38,36 @@
  */
 package com.dariawan.text;
 
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class NumberFormatExample {
+public class CompactNumberFormatRounding {
 
     public static void main(String args[]) {
 
-        NumberFormat nf = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
+        NumberFormat nf = NumberFormat.getCompactNumberInstance(
+                Locale.US, NumberFormat.Style.SHORT);
         
-        System.out.println("NumberFormat.Style.SHORT:");
-        System.out.println("Result: " + nf.format(100000));
-        System.out.println("Result: " + nf.format(120300));
-        System.out.println("Result: " + nf.format(2120000));
+        System.out.println("\nResult: " + nf.format(123454));
+        System.out.println("Result: " + nf.format(5156835));
         
-        nf = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.LONG);
+        nf.setMinimumFractionDigits(2);   
+        nf.setMaximumFractionDigits(2);
+        System.out.println("\nResult: " + nf.format(123454));
+        System.out.println("Result: " + nf.format(5156835));
         
-        System.out.println("\nNumberFormat.Style.LONG:");
-        System.out.println("Result: " + nf.format(100000));
-        System.out.println("Result: " + nf.format(120300));
-        System.out.println("Result: " + nf.format(2120000));        
+        nf.setRoundingMode(RoundingMode.UP);
+        System.out.println("\nResult: " + nf.format(123454));
+        System.out.println("Result: " + nf.format(5156835));
+        
+        nf.setMinimumFractionDigits(1); 
+        nf.setMaximumFractionDigits(1);        
+        System.out.println("\nResult: " + nf.format(123454));
+        System.out.println("Result: " + nf.format(5156835));
+        
+        nf.setRoundingMode(RoundingMode.DOWN);
+        System.out.println("\nResult: " + nf.format(123454));
+        System.out.println("Result: " + nf.format(5156835));
     }
 }
